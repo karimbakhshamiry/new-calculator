@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        padding: 10px 20px;
+      }
+      #screen {
+        border: 2px solid black;
+        margin-bottom: 10px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="claculator">
+      <div id="screen"></div>
+      <div id="buttons">
+        <button class="digit">1</button>
+        <button class="digit">2</button>
+        <button class="digit">3</button>
+        <button class="digit">4</button>
+        <button class="digit">5</button>
+        <button class="digit">6</button>
+        <button class="digit">7</button>
+        <button class="digit">8</button>
+        <button class="digit">9</button>
+        <button class="digit">0</button>
+        <!-- <button class="digit">0</button> -->
+        <button class="operator">+</button>
+        <button class="operator">-</button>
+        <button class="operator">*</button>
+        <button class="operator">/</button>
+        <button class="equal" id="equal">=</button>
+      </div>
+    </div>
+
+    <script>
+      const screen = document.getElementById("screen");
+      const digits = document.querySelectorAll(".digit");
+      const operators = document.querySelectorAll(".operator");
+      const equalButton = document.getElementById("equal");
+      let operatorClicked = false;
+
+      digits.forEach(function (digit) {
+        digit.addEventListener("click", function () {
+          screen.textContent = screen.textContent + digit.textContent;
+          operatorClicked = false;
+        });
+      });
+
+      operators.forEach(function (operator) {
+        operator.addEventListener("click", function () {
+          console.log(operatorClicked, "clicked");
+          if (operatorClicked === true) {
+            console.log("do not add anything");
+          } else {
+            screen.textContent = screen.textContent + operator.textContent;
+            operatorClicked = true;
+            console.log("post operator to screen");
+          }
+        });
+      });
+
+      equalButton.addEventListener("click", function () {
+        const result = eval(screen.textContent);
+        screen.textContent = result;
+      });
+    </script>
+  </body>
+</html>
